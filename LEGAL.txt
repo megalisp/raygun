@@ -1,0 +1,25 @@
+=======================================================================================================================
+
+Copyright © 2025, '( ) MEGA [ie: Jost Grant]
+
+-----------------------------------------------------------------------------------------------------------------------
+
+This project (including all code, docs, and assets are/) 
+is dual-licensed under the following open-source licenses:
+
+* Apache 2.0 License
+http://www.apache.org/licenses/LICENSE-2.0
+
+* MIT License
+https://opensource.org/licenses/MIT
+
+Terms and Conditions
+--------------------
+This project is made available under the following terms:
+
+- You are free to use, modify, and distribute the software under the terms of the selected license.
+- Please refer to the full text of the respective licenses for more details, especially re: requirements.
+
+[!] By contributing to this project, you agree to distribute your code under said / aforementioned licenses.
+
+-----------------------------------------------------------------------------------------------------------------------

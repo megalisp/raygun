@@ -1,0 +1,88 @@
+# NEWT site justfile
+# Usage: just <command>
+# Install just: https://github.com/casey/just
+
+# Show available commands
+default:
+    @just --list
+
+# Build for local development
+local:
+    @echo "Building for local development..."
+    NEWT_LOCAL=1 raco newt --clean && NEWT_LOCAL=1 raco newt --build
+    @echo "Built for local development. Files can be served with any local server."
+
+# Build for production (GitHub Pages)  
+prod:
+    @echo "Building for production (GitHub Pages)..."
+    raco newt --clean && raco newt --build
+    @echo "Built for production. Ready to commit and push to GitHub."
+
+# Build and serve locally with Racket web server
+serve:
+    @echo "Building for local development and starting server..."
+    NEWT_LOCAL=1 raco newt --clean && NEWT_LOCAL=1 raco newt --build
+    @echo "Starting Racket web server on http://localhost:3000"
+    @echo "Press Ctrl+C to stop the server"
+    NEWT_LOCAL=1 raco newt --serve
+
+# Build, serve, and open in browser
+preview:
+    @echo "Building for local development and opening in browser..."
+    NEWT_LOCAL=1 raco newt --clean && NEWT_LOCAL=1 raco newt --build
+    @echo "Starting Racket web server and opening browser..."
+    NEWT_LOCAL=1 raco newt --preview
+
+# Build and serve with auto-rebuild on file changes
+watch:
+    @echo "Building for local development with auto-rebuild..."
+    NEWT_LOCAL=1 raco newt --clean && NEWT_LOCAL=1 raco newt --build
+    @echo "Starting Racket web server with file watching on http://localhost:3000"
+    @echo "Files will rebuild automatically when changed. Press Ctrl+C to stop."
+    NEWT_LOCAL=1 raco newt --watch --serve
+
+# Clean generated files
+clean:
+    @echo "Cleaning generated files..."
+    raco newt --clean
+    @echo "Cleaned."
+
+# Development workflow shortcuts
+alias dev := watch
+alias start := serve
+alias build := prod
+
+# Multi-command recipes for common workflows
+
+# Full development setup (clean, build, serve with watch)
+develop:
+    @echo "Setting up full development environment..."
+    just clean
+    just watch
+
+# Deploy workflow (build for prod and show git status)
+deploy:
+    @echo "Building for deployment..."
+    just prod
+    @echo ""
+    @echo "Build complete! Git status:"
+    cd .. && git status --short
+    @echo ""
+    @echo "To deploy, run:"
+    @echo "  cd .. && git add ."
+    @echo "  cd .. && git commit -m 'Update site'"
+    @echo "  cd .. && git push"
+    @echo ""
+    @echo "Or from the docs directory:"
+    @echo "  git add -A .."
+    @echo "  git commit -m 'Update site'"
+    @echo "  git push"
+
+# Quick check - build both local and prod to verify everything works
+check:
+    @echo "Checking both local and production builds..."
+    just local
+    @echo ""
+    just prod
+    @echo ""
+    @echo "Both builds completed successfully!"

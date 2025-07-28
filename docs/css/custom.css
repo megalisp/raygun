@@ -1,0 +1,382 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko:wght@600&display=swap');
+
+/* === CSS Custom Properties for Theming === */
+:root {
+  /* Dark theme (default) */
+  --bg-color: #0a0a0a;
+  --text-color: #e0e0e0;
+  --bg-line-color: #111;
+  --accent-color: #ff003c;
+  --accent-lighter: #888888;
+  --accent-darker: #ff1a1a;
+  --card-bg: #111111;
+  --navbar-bg: #000000;
+  --footer-bg: #050505;
+  --post-footer-bg: #161616;
+  --code-bg: #1a1a1a;
+  --code-text: #f8f8f8;
+  --code-inline-bg: #330000;
+  --code-inline-text: #ffaaaa;
+  --dropdown-bg: #1a1a1a;
+  --shadow-color: rgba(255, 0, 60, 0.1);
+}
+
+/* Light theme */
+body[data-theme="light"] {
+  --bg-color: #ffffff;
+  --text-color: #202020;
+  --bg-line-color: #f0f0f0;
+  --accent-color: #ff003c;
+  --accent-lighter: #666666;
+  --accent-darker: #cc0030;
+  --card-bg: #ffffff;
+  --navbar-bg: #f8f8f8;
+  --footer-bg: #ffffff;
+  --post-footer-bg: #f8f8f8;
+  --code-bg: #f8f8f8;
+  --code-text: #202020;
+  --code-inline-bg: #ffe6e6;
+  --code-inline-text: #cc0030;
+  --dropdown-bg: #ffffff;
+  --shadow-color: rgba(255, 0, 60, 0.15);
+}
+
+/* === RAYGUN Banner === */
+.raygun-banner {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: transparent;
+  color: var(--accent-color);
+  text-align: center;
+  font-family: 'Teko', sans-serif;
+  font-size: clamp(4rem, 15vw, 23rem);
+  font-weight: 900;
+  letter-spacing: 16px;
+  text-transform: uppercase;
+  position: relative;
+  z-index: 1;
+  max-width: 100vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-shadow: 
+    -2px -2px 0 black,
+    2px -2px 0 black,
+    -2px 2px 0 black,
+    2px 2px 0 black,
+    -2px 0px 0 black,
+    2px 0px 0 black,
+    0px -2px 0 black,
+    0px 2px 0 black;
+}
+
+
+/* === Unicode icons styling === */
+.unicode-icon {
+  color: var(--accent-color);
+  font-weight: bold;
+  margin-right: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+/* === Global Base === */
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  font-family: system-ui, sans-serif;
+  background-image: repeating-linear-gradient(
+    0deg,
+    var(--bg-color),
+    var(--bg-color) 49px,
+    var(--bg-line-color) 50px
+  );
+  background-size: 100% 50px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* === Typography === */
+h1, h2, h3, h4 {
+  font-family: 'Teko', sans-serif;
+  color: var(--accent-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom: 2px dashed var(--accent-color);
+  padding-bottom: 0.2em;
+  margin-top: 1em;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+a {
+  color: var(--accent-color);
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-lighter);
+  text-decoration: underline dashed;
+}
+
+/* === Navbar === */
+.navbar {
+  background-color: var(--navbar-bg) !important;
+  border-bottom: 8px solid var(--accent-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  font-size: 1.8rem;
+  color: var(--accent-color) !important;
+  font-family: 'Teko', sans-serif;
+  transition: color 0.3s ease;
+  line-height: 1;
+}
+
+.navbar-brand span {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  transform: translateY(2px);
+}
+
+.navbar-logo {
+  max-width: 33px;
+  margin-right: 0.2em;
+}
+
+.nav-link {
+  color: var(--text-color) !important;
+  transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+  color: var(--accent-color) !important;
+}
+
+/* Theme toggle button styling */
+.theme-toggle {
+  border: none !important;
+  background: var(--accent-color) !important;
+  padding: 0.2rem !important;
+  color: white !important;
+  border-radius: 50% !important;
+  width: 28px !important;
+  height: 28px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  margin: 0 !important;
+  margin-left: 0.2rem !important;
+  vertical-align: middle !important;
+}
+
+.nav-item .theme-toggle {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+  align-self: center !important;
+}
+
+/* Ensure nav item containing theme toggle aligns properly */
+.navbar-nav .nav-item:has(.theme-toggle) {
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* Fallback for browsers that don't support :has() */
+.navbar-nav .nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-lighter) !important;
+  color: white !important;
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.theme-toggle:focus {
+  outline: 2px solid var(--accent-lighter);
+  outline-offset: 2px;
+}
+
+/* Theme icon styling */
+.theme-icon-light,
+.theme-icon-dark {
+  color: white !important;
+  transition: color 0.3s ease;
+}
+
+/* Light theme specific adjustments */
+body[data-theme="light"] .theme-toggle {
+  background: var(--accent-color) !important;
+  color: white !important;
+}
+
+body[data-theme="light"] .theme-toggle:hover {
+  background: var(--accent-darker) !important;
+}
+
+/* === Dropdown Menu === */
+.dropdown-menu {
+  background-color: var(--dropdown-bg);
+  border: 1px solid var(--accent-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item {
+  color: var(--text-color);
+  transition: color 0.3s ease, background-color 0.3s ease;
+}
+
+.dropdown-menu .dropdown-item:hover {
+  background-color: var(--accent-color);
+  color: white;
+}
+
+/* === Articles === */
+article {
+  background-color: var(--bg-color);
+  border: 3px dashed var(--accent-color);
+  border-left: 6px solid var(--accent-darker);
+  padding: 1.5em;
+  margin: 2em 0;
+  border-radius: 6px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.date-and-tags,
+.authors {
+  color: var(--text-color);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  font-weight: bold;
+  opacity: 0.8;
+  transition: color 0.3s ease;
+}
+
+/* === Footer === */
+footer {
+  width: 100vw;
+  margin-left: calc(-50vw + 50%);
+  background-color: var(--footer-bg);
+  color: var(--text-color);
+  border-top: 4px double var(--accent-darker);
+  padding: 2em;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+footer a {
+  color: var(--accent-color);
+  transition: color 0.3s ease;
+}
+
+footer a:hover {
+  color: var(--accent-lighter);
+}
+
+/* === Post Footer === */
+.post-footer {
+  background-color: var(--post-footer-bg);
+  border-top: 2px dashed var(--accent-lighter);
+  padding: 1em;
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--accent-color);
+  margin-top: 2em;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px var(--shadow-color);
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Dark theme post footer styling */
+body:not([data-theme="light"]) .post-footer {
+  background-color: #000000;
+  border-left: 2px solid var(--accent-color);
+  border-right: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  border-top: 2px dashed var(--accent-color);
+}
+
+/* Light theme post footer styling */
+body[data-theme="light"] .post-footer {
+  background-color: #ffffff;
+  border-left: 2px solid var(--accent-color);
+  border-right: 2px solid var(--accent-color);
+  border-bottom: 2px solid var(--accent-color);
+  border-top: 2px dashed var(--accent-color);
+}
+
+.post-footer a {
+  color: var(--accent-color);
+  text-decoration: none;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease;
+}
+
+.post-footer a:hover {
+  color: var(--accent-lighter);
+  text-decoration: underline dashed;
+}
+
+/* === Code Blocks === */
+pre {
+  background-color: var(--code-bg);
+  color: var(--code-text);
+  border-left: 5px solid var(--accent-color);
+  padding: 0.5em;
+  border-radius: 3px;
+  overflow-x: auto;
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+code {
+  background-color: var(--code-inline-bg);
+  color: var(--code-inline-text);
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+  font-size: 0.95em;
+  font-family: monospace;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+pre code {
+  background-color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
+/* === Spoiler === */
+.spoiler {
+  background-color: var(--text-color);
+  color: transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  border-radius: 3px;
+  padding: 0 2px;
+  display: inline-block;
+  width: 3ch;
+  white-space: nowrap;
+  position: relative;
+  top: 7px;
+}
+
+.spoiler:hover {
+  opacity: 0.8;
+}
+
+.spoiler.revealed {
+  background-color: transparent;
+  color: inherit;
+  width: auto;
+  top: 5px;
+}
